@@ -16,7 +16,7 @@ endif
 
 COMMAND_CDEFINES		=-DCHICHI
 COMMAND_CFLAGS			=-Wvarargs
-DEBUG_LEVEL				=-g3 -gcodeview
+DEBUG_LEVEL				=-g3 
 
 ifeq ($(OPTI),none)
 	COMMAND_CFLAGS		+= -O0

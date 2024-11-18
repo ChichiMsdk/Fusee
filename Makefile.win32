@@ -3,8 +3,7 @@ LIBS			+= -lSDL2main -lSDL2 -lSDL2_image
 
 INCLUDE_DIRS	+= -IC:/Lib/SDL2/include
 
-LIB_PATH		+= -LC:/vulkan/Lib
-LIB_PATH		+= -LC:/Lib/glfw/lib-vc2022
+LIB_PATH		+= -LC:/Lib/SDL2/lib
 
 # CC =clang++
 ECHO_E			+= -e
