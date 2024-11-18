@@ -27,10 +27,9 @@ EventWindow(SDL_WindowEvent e)
 void
 Event(SDL_Event *e, Fusee* pFusee)
 {
-	float rotationSpeed = 1.0f;
+	float rotationSpeed = 0.3f;
 	while(SDL_PollEvent(e))
 	{
-		/* sInfo sInfo = {.nbrPages = 5, 3, 800, 0}; */
 		if (e->type == SDL_QUIT) { gInst.running = false; }
 		else if (e->type == SDL_WINDOWEVENT) EventWindow(e->window);
 		else if (e->type == SDL_KEYDOWN) 
@@ -39,21 +38,6 @@ Event(SDL_Event *e, Fusee* pFusee)
 			{
 				case (SDLK_ESCAPE):
 					gInst.running = false; 
-					break;
-				case (SDLK_RIGHT):
-					pFusee->angle += rotationSpeed;
-					if (pFusee->angle >= 360)
-						pFusee->angle -= 360;
-					break;
-				case (SDLK_LEFT):
-					pFusee->angle -= rotationSpeed;
-					if (pFusee->angle < 0)
-						pFusee->angle += 360;
-					break;
-				case (SDLK_SPACE):
-					float radians = pFusee->angle * M_PI / 180.0f;
-					pFusee->velocity.x += pFusee->power * sin(radians);
-					pFusee->velocity.y -= pFusee->power * cos(radians);
 					break;
 				case (SDLK_h):
 				case (SDLK_l):
@@ -68,5 +52,25 @@ Event(SDL_Event *e, Fusee* pFusee)
 		else if (e->type == SDL_MOUSEWHEEL)
 		{
 		}
+	}
+	const uint8_t* pKeys = SDL_GetKeyboardState(NULL);
+
+	if (pKeys[SDL_SCANCODE_LEFT])
+	{
+		pFusee->angle -= rotationSpeed;
+		if (pFusee->angle < 0)
+			pFusee->angle += 360;
+	}
+	if (pKeys[SDL_SCANCODE_RIGHT])
+	{
+		pFusee->angle += rotationSpeed;
+		if (pFusee->angle >= 360)
+			pFusee->angle -= 360;
+	}
+	if (pKeys[SDL_SCANCODE_SPACE])
+	{
+		float radians = pFusee->angle * M_PI / 180.0f;
+		pFusee->velocity.x += pFusee->power * sin(radians);
+		pFusee->velocity.y -= pFusee->power * cos(radians);
 	}
 }
