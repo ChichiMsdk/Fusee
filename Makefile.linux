@@ -1,0 +1,45 @@
+CC				=clang-19
+C++				=clang++-19
+CLINKER			=mold
+
+INCLUDE_DIRS	+= -I$(HOME)/tracy/public -I$(HOME)/tracy/public/tracy
+
+LIBS			+=-lGL -lglfw -lvulkan -lwayland-client -lxkbcommon -lm
+
+CDEFINES		+=-DPLATFORM_LINUX
+CDEFINES		+=-D_POSIX_C_SOURCE=199309L
+CDEFINES		+=-DYGLFW3
+
+C_OBJS			+= $(LINUX_OBJS) $(VULKAN_OBJS)
+OUTPUT			=$(NAME)
+
+DEBUG_LEVEL =-ggdb3
+
+############################## COLORS ###################################
+NC=\033[0m
+BOLD=\033[1m
+UNDER=\033[4m
+REV=\033[7m
+
+GREY=\033[0;30m
+RED=\033[0;31m
+GREEN=\033[0;32m
+YELLOW=\033[0;33m
+BLUE=\033[0;34m
+PURPLE=\033[0;35m
+CYAN=\033[0;36m
+WHITE=\033[0;37m
+
+NC=
+BOLD=
+UNDER=
+REV=
+
+GREY=
+RED=
+GREEN=
+YELLOW=
+BLUE=
+PURPLE=
+CYAN=
+WHITE=
