@@ -58,19 +58,34 @@ Event(SDL_Event *e, Fusee* pFusee)
 	if (pKeys[SDL_SCANCODE_LEFT] && pKeys[SDL_SCANCODE_SPACE] && pFusee->position.y > 0 && pFusee->position.y < gInst.height - pFusee->box.h)
 	{
 		pFusee->angle -= rotationSpeed;
+		pFusee->fire.angle -= rotationSpeed;
 		if (pFusee->angle < 0)
 			pFusee->angle += 360;
+		if (pFusee->fire.angle < 0)
+			pFusee->fire.angle += 360;
+		pFusee->firing = true;
 	}
 	else if (pKeys[SDL_SCANCODE_RIGHT] && pKeys[SDL_SCANCODE_SPACE] && pFusee->position.y > 0 && pFusee->position.y < gInst.height - pFusee->box.h)
 	{
 		pFusee->angle += rotationSpeed;
+		pFusee->fire.angle += rotationSpeed;
 		if (pFusee->angle >= 360)
 			pFusee->angle -= 360;
+		if (pFusee->fire.angle >= 360)
+			pFusee->fire.angle -= 360;
+		pFusee->firing = true;
 	}
 	else if (pKeys[SDL_SCANCODE_SPACE])
 	{
 		float radians = pFusee->angle * M_PI / 180.0f;
 		pFusee->velocity.x += pFusee->power * sin(radians);
 		pFusee->velocity.y -= pFusee->power * cos(radians);
+
+		radians = pFusee->angle * M_PI / 180.0f;
+		pFusee->fire.velocity.x += pFusee->power * sin(radians);
+		pFusee->fire.velocity.y -= pFusee->power * cos(radians);
+
+		pFusee->firing = true;
 	}
+	pFusee->firing = false;
 }

@@ -5,6 +5,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include <stdbool.h>
+
 #define MAX_VISIBLE_PAGES 20
 
 typedef struct Instance
@@ -23,6 +25,15 @@ typedef struct Vec2
 	float y;
 } Vec2;
 
+typedef struct Feu
+{
+	Vec2			velocity;
+	Vec2			position;
+	Vec2			origin;
+	float			angle;
+	SDL_Texture*	fireTexture;
+} Feu;
+
 typedef struct Fusee
 {
 	Vec2			velocity;
@@ -31,8 +42,10 @@ typedef struct Fusee
 	float			power;
 	float			angle;
 	SDL_Rect		box;
+	bool			firing;
 
-	SDL_Texture*	texture;
+	Feu				fire;
+	SDL_Texture*	fuseeTexture;
 } Fusee;
 
 typedef struct Canvas
