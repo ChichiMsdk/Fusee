@@ -1,13 +1,13 @@
 #include "event.h"
 
+#include <stdbool.h>
+#include <math.h>
 #include <stdio.h>
 
 void
 ResizeWindow(void)
 {
-	printf("gInst.width %d, gInst.height %d\t->\t", gInst.width, gInst.height);
 	SDL_GetWindowSize(gInst.pWin, &gInst.width, &gInst.height);
-	printf("gInst.width %d, gInst.height %d\n", gInst.width, gInst.height);
 }
 
 void
@@ -55,19 +55,19 @@ Event(SDL_Event *e, Fusee* pFusee)
 	}
 	const uint8_t* pKeys = SDL_GetKeyboardState(NULL);
 
-	if (pKeys[SDL_SCANCODE_LEFT])
+	if (pKeys[SDL_SCANCODE_LEFT] && pKeys[SDL_SCANCODE_SPACE] && pFusee->position.y > 0 && pFusee->position.y < gInst.height - pFusee->box.h)
 	{
 		pFusee->angle -= rotationSpeed;
 		if (pFusee->angle < 0)
 			pFusee->angle += 360;
 	}
-	if (pKeys[SDL_SCANCODE_RIGHT])
+	else if (pKeys[SDL_SCANCODE_RIGHT] && pKeys[SDL_SCANCODE_SPACE] && pFusee->position.y > 0 && pFusee->position.y < gInst.height - pFusee->box.h)
 	{
 		pFusee->angle += rotationSpeed;
 		if (pFusee->angle >= 360)
 			pFusee->angle -= 360;
 	}
-	if (pKeys[SDL_SCANCODE_SPACE])
+	else if (pKeys[SDL_SCANCODE_SPACE])
 	{
 		float radians = pFusee->angle * M_PI / 180.0f;
 		pFusee->velocity.x += pFusee->power * sin(radians);

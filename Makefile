@@ -14,7 +14,7 @@ else
 	MYFIND :=find
 endif
 
-COMMAND_CDEFINES		=-DCHICHI
+COMMAND_CDEFINES		=
 COMMAND_CFLAGS			=-Wvarargs
 DEBUG_LEVEL				=-g3 
 
@@ -39,7 +39,6 @@ CC				=clang
 CLINKER			=clang
 CFLAGS			=$(COMMAND_CFLAGS)
 CFLAGS			+= -fdiagnostics-absolute-paths
-CFLAGS			+= -std=c23
 CFLAGS			+= -fno-inline -fno-omit-frame-pointer
 CFLAGS			+= -Wno-missing-field-initializers -Wno-unused-but-set-variable
 CDEFINES		=$(COMMAND_CDEFINES)

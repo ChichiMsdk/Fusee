@@ -29,23 +29,28 @@ FuseeCheck(Fusee* pFusee)
 {
 	if (pFusee->position.x <= 0)
 	{
-		pFusee->position.x = gInst.width;
+		pFusee->position.x = 0;
+		pFusee->velocity.x = 0;
 	}
 
 	if (pFusee->position.x + pFusee->box.w >= gInst.width) 
 	{
 		pFusee->position.x = gInst.width - pFusee->box.w;
+		pFusee->velocity.x = 0;
 	}
 
 	if (pFusee->position.y <= 0)
 	{
 		pFusee->position.y = 0;
+		pFusee->velocity.y = 0;
+		pFusee->velocity.x = 0;
 	}
 
 	if (pFusee->position.y + pFusee->box.h >= gInst.height) 
 	{
 		pFusee->position.y = gInst.height - pFusee->box.h;
 		pFusee->velocity.y = 0;
+		pFusee->velocity.x = 0;
 	}
 }
 
